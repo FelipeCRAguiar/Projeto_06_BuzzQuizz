@@ -30,3 +30,7 @@ function finalizarQuizz() {
     document.querySelector(".niveis-quizz").classList.add("escondido")
     document.querySelector(".quizz-criado").classList.remove("escondido")
 }
+function voltarHome() {
+    document.querySelector(".quizz-criado").classList.add("escondido")
+    document.querySelector(".pagina-principal").classList.remove("escondido")
+}

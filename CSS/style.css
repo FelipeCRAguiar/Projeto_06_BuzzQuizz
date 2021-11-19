@@ -22,10 +22,14 @@ header {
     justify-content: center;
 }
 .alinharQuiz {
-    width: 1051px;
-    margin-left: 194px;
-    margin-right: 194px;
     padding-top: 77px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.todosQuizzes {
+    width: 1051px;
 }
 .addQuiz {
     width: 1051px;
@@ -290,8 +294,8 @@ header {
     box-shadow: 0px 0px 10px 0px #0000000D;
 
     margin-top: 43px;
-    margin-left: 220px;
     padding: 17px 20px;
+    box-sizing: border-box;
 }
 .nivel .topo {
     width: 600px;
@@ -309,7 +313,7 @@ header {
     background-color: #FFFFFF;
     margin-top: 14px;
 }
-.nivel input::placeholder {
+input::placeholder {
     font-size: 19px;
     font-family: roboto;
     font-weight: 400;
@@ -329,7 +333,7 @@ header {
     font-weight: 400;
     text-align: center;
     color: #FFF5F4;
-    margin-left: 369px;
+    border: none;
 }
 .escondido {
     display: none;

@@ -41,10 +41,10 @@
         <div class="conteudo-quizz-basico">
             <p>Começe Pelo começo</p>
             <div class="informacoes-basicas">
-                <input placeholder="    Título do seu quizz"> <br>
-                <input placeholder="    URL da imagem do seu quizz"> <br>
-                <input placeholder="    Quantidade de perguntas do quizz"> <br>
-                <input placeholder="    Quantidade de níveis do quizz">
+                <input placeholder="Título do seu quizz"> <br>
+                <input placeholder="URL da imagem do seu quizz"> <br>
+                <input placeholder="Quantidade de perguntas do quizz"> <br>
+                <input placeholder="Quantidade de níveis do quizz">
             </div>
             <button onclick="criarPerguntas()">Prosseguir pra criar perguntas</button>
         </div>
@@ -54,27 +54,27 @@
         <div class="criar-pergunta">
             <div class="pergunta-resposta">
                 <p>Pergunta 1</p>
-                <input placeholder="    Texto da pergunta"> <br>
-                <input placeholder="    Cor de fundo da pergunta">
+                <input placeholder="Texto da pergunta"> <br>
+                <input placeholder="Cor de fundo da pergunta">
             </div>
             <div class="pergunta-resposta">
                 <p>Resposta Correta</p>
-                <input placeholder="    Resposta correta"> <br>
-                <input placeholder="    URL da imagem">
+                <input placeholder="Resposta correta"> <br>
+                <input placeholder="URL da imagem">
             </div>
             <div class="respostas-incorretas">
                 <p>Respostas Incorretas</p>
                 <div>
-                    <input placeholder="    Resposta incorreta 1"> <br>
-                    <input placeholder="    URL da imagem 1">
+                    <input placeholder="Resposta incorreta 1"> <br>
+                    <input placeholder="URL da imagem 1">
                 </div>
                 <div>
-                    <input placeholder="    Resposta incorreta 2"> <br>
-                    <input placeholder="    URL da imagem 2">
+                    <input placeholder="Resposta incorreta 2"> <br>
+                    <input placeholder="URL da imagem 2">
                 </div>
                 <div>
-                    <input placeholder="    Resposta incorreta 3"> <br>
-                    <input placeholder="    URL da imagem 3">
+                    <input placeholder="Resposta incorreta 3"> <br>
+                    <input placeholder="URL da imagem 3">
                 </div>
             </div>
         </div>
@@ -82,16 +82,6 @@
             <p>Pergunta 2</p><ion-icon name="create-outline"></ion-icon>
         </div>
         <button onclick="criarNiveis()">Prosseguir para criar níveis</button>
-    </div>
-    <div class="quizz-criado escondido">
-        <div class="previa-quizz">
-            <p>Seu quizz está pronto!</p>
-            <div>
-                <img src="quiz.jpg">
-            </div>
-            <button class="acessar-quizz">Acessar quizz</button>
-            <button class="voltar-home">Voltar pra home</button>
-        </div>
     </div>
     <div class="niveis-quizz escondido">
         <div class="alinharQuiz">
@@ -126,7 +116,17 @@
                 <input type="text" placeholder="URL da imagem do nível">
                 <input type="text" placeholder="Descrição do nível">
             </div>
-            <button class="finalizarQuizz" onclick="finalizarQuizz()">finalizarQuizz</button>
+            <button class="finalizarQuizz" onclick="finalizarQuizz()">Finalizar Quizz</button>
+        </div>
+    </div>
+    <div class="quizz-criado escondido">
+        <div class="previa-quizz">
+            <p>Seu quizz está pronto!</p>
+            <div>
+                <img src="quiz.jpg">
+            </div>
+            <button class="acessar-quizz">Acessar quizz</button>
+            <button class="voltar-home" onclick="voltarHome()">Voltar pra home</button>
         </div>
     </div>
     <script src="https://unpkg.com/ionicons@5.4.0/dist/ionicons.js"></script>
