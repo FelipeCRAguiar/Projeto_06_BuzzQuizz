@@ -81,7 +81,7 @@
         <div class="placeholder-pergunta">
             <p>Pergunta 2</p><ion-icon name="create-outline"></ion-icon>
         </div>
-        <button>Prosseguir para criar níveis</button>
+        <button onclick="criarNiveis()">Prosseguir para criar níveis</button>
     </div>
     <div class="quizz-criado escondido">
         <div class="previa-quizz">
@@ -91,6 +91,42 @@
             </div>
             <button class="acessar-quizz">Acessar quizz</button>
             <button class="voltar-home">Voltar pra home</button>
+        </div>
+    </div>
+    <div class="niveis-quizz escondido">
+        <div class="alinharQuiz">
+            <p class="títuloPagina">Agora, decida os níveis</p>
+            <div class="nivel">
+                <topo>
+                    Nível 1
+                    <img src="/Imagens/Vector.png">
+                </topo>
+                <input type="text" placeholder="Título do nível">
+                <input type="text" placeholder="% de acerto mínima">
+                <input type="text" placeholder="URL da imagem do nível">
+                <input type="text" placeholder="Descrição do nível">
+            </div>
+            <div class="nivel">
+                <topo>
+                    Nível 2
+                    <img src="/Imagens/Vector.png">
+                </topo>
+                <input type="text" placeholder="Título do nível">
+                <input type="text" placeholder="% de acerto mínima">
+                <input type="text" placeholder="URL da imagem do nível">
+                <input type="text" placeholder="Descrição do nível">
+            </div>
+            <div class="nivel">
+                <topo>
+                    Nível 3
+                    <img src="/Imagens/Vector.png">
+                </topo>
+                <input type="text" placeholder="Título do nível">
+                <input type="text" placeholder="% de acerto mínima">
+                <input type="text" placeholder="URL da imagem do nível">
+                <input type="text" placeholder="Descrição do nível">
+            </div>
+            <button class="finalizarQuizz" onclick="finalizarQuizz()">finalizarQuizz</button>
         </div>
     </div>
     <script src="https://unpkg.com/ionicons@5.4.0/dist/ionicons.js"></script>

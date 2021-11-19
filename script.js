@@ -22,3 +22,11 @@ function criarPerguntas() {
     document.querySelector(".quizz-basico").classList.add("escondido")
     document.querySelector(".pergunta-quizz").classList.remove("escondido")
 }
+function criarNiveis() {
+    document.querySelector(".pergunta-quizz").classList.add("escondido")
+    document.querySelector(".niveis-quizz").classList.remove("escondido")
+}
+function finalizarQuizz() {
+    document.querySelector(".niveis-quizz").classList.add("escondido")
+    document.querySelector(".quizz-criado").classList.remove("escondido")
+}
