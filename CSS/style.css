@@ -179,7 +179,10 @@ header {
     line-height: 22px;
     margin-bottom: 14px;
 }
-.pergunta-resposta {
+.pergunta {
+    margin-bottom: 14px;
+}
+.resposta-correta {
     margin-bottom: 14px;
 }
 .respostas-incorretas div {
@@ -334,6 +337,7 @@ input::placeholder {
     text-align: center;
     color: #FFF5F4;
     border: none;
+    margin-bottom: 100px;
 }
 .escondido {
     display: none;
