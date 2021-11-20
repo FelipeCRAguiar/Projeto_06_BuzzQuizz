@@ -339,6 +339,30 @@ input::placeholder {
     border: none;
     margin-bottom: 100px;
 }
+.placeholder-nivel {
+    margin-top: 24px;
+    width: 601px;
+    height: 74px;
+    background-color: #FFFFFF;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.05);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-sizing: border-box;
+    padding-right: 24px;
+    padding-left: 17px;
+    margin-bottom: 22px;
+}
+.placeholder-nivel p {
+    font-family: Roboto;
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 23px;
+    color: #000000;
+}
+.placeholder-nivel ion-icon {
+    font-size: 26px;
+}
 .escondido {
     display: none;
 }
