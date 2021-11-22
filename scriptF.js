@@ -1,3 +1,4 @@
+let quizzUsuario = {}
 function criarQuizz() {
     document.querySelector(".pagina-principal").classList.add("escondido")
     document.querySelector(".quizz-basico").classList.remove("escondido")
@@ -22,6 +23,67 @@ function criarPerguntas(clique) {
     catch {
         return alert("Sua URL não é valida")
     }*/
+    document.querySelector(".pergunta-quizz").innerHTML = `
+    <p>Crie suas perguntas</p>
+        <div class="criar-pergunta">
+            <div class="pergunta">
+                <p>Pergunta 1</p>
+                <input placeholder="Texto da pergunta"> <br>
+                <input placeholder="Cor de fundo da pergunta">
+            </div>
+            <div class="resposta-correta">
+                <p>Resposta Correta</p>
+                <input placeholder="Resposta correta"> <br>
+                <input placeholder="URL da imagem">
+            </div>
+            <div class="respostas-incorretas">
+                <p>Respostas Incorretas</p>
+                <div>
+                    <input placeholder="Resposta incorreta 1"> <br>
+                    <input placeholder="URL da imagem 1">
+                </div>
+                <div>
+                    <input placeholder="Resposta incorreta 2"> <br>
+                    <input placeholder="URL da imagem 2">
+                </div>
+                <div>
+                    <input placeholder="Resposta incorreta 3"> <br>
+                    <input placeholder="URL da imagem 3">
+                </div>
+            </div>
+        </div>
+    `
+    for (let i = 1; i<numPerguntas;i++) {
+        document.querySelector(".pergunta-quizz").innerHTML += `
+        <div class="placeholder-pergunta">
+            <p>Pergunta ${i+1}</p><ion-icon name="create-outline" onclick="abrirPergunta(this)"></ion-icon>
+        </div>
+        `
+    }
+    document.querySelector(".pergunta-quizz").innerHTML += '<button onclick="criarNiveis()">Prosseguir para criar níveis</button>'
+    document.querySelector(".niveis-quizz .alinharQuiz").innerHTML = `
+    <p class="títuloPagina">Agora, decida os níveis</p>
+    <div class="nivel">
+        <topo>
+            Nível 1
+        </topo>
+        <input type="text" placeholder="Título do nível">
+        <input type="text" placeholder="% de acerto mínima">
+        <input type="text" placeholder="URL da imagem do nível">
+        <input type="text" placeholder="Descrição do nível">
+    </div>
+    `
+    for (let i3 = 1; i3<numNiveis; i3++) {
+        document.querySelector(".niveis-quizz .alinharQuiz").innerHTML += `
+        <div class="placeholder-nivel">
+            <p>Nível ${i3+1}</p><ion-icon name="create-outline" onclick="abrirNivel(this)"></ion-icon>
+        </div>
+        `
+    }
+    document.querySelector(".niveis-quizz .alinharQuiz").innerHTML += '<button class="finalizarQuizz" onclick="finalizarQuizz()">Finalizar Quizz</button>'
+    for (let i2 = 0; i2<lista.length; i2++) {
+        lista[i2].value = ""
+    }
     document.querySelector(".quizz-basico").classList.add("escondido")
     document.querySelector(".pergunta-quizz").classList.remove("escondido")
 }
@@ -87,7 +149,7 @@ function finalizarQuizz() {
     let listaNiveis = document.querySelectorAll(".nivel")
     let listaPorcentagem = []
     let checagem0 = 0
-    for (let i = 0; i<listaNiveis.length; i++) {
+    /*for (let i = 0; i<listaNiveis.length; i++) {
         let inputNivel = listaNiveis[i].querySelectorAll("input")
         if (inputNivel[0].value.length < 10) {
             return alert("O nivel deve ter no minimo 10 caracteres")
@@ -116,7 +178,7 @@ function finalizarQuizz() {
     }
     if (checagem0 === 0) {
         return alert("Pelo menos uma das porcentagens tem que ser 0")
-    }
+    }*/
     document.querySelector(".niveis-quizz").classList.add("escondido")
     document.querySelector(".quizz-criado").classList.remove("escondido")
 }
