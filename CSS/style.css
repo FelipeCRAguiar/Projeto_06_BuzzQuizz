@@ -174,7 +174,6 @@ header {
     border: 1px solid #D1D1D1;
     border-radius: 5px;
     font-family: Roboto;
-    font-weight: normal;
     font-size: 19px;
     line-height: 22px;
     margin-bottom: 14px;
@@ -314,6 +313,9 @@ header {
     border-radius: 5px;
     border: 1px solid #D1D1D1;
     background-color: #FFFFFF;
+    font-family: Roboto;
+    font-size: 19px;
+    line-height: 22px;
     margin-top: 14px;
 }
 input::placeholder {
