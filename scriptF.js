@@ -4,6 +4,7 @@ let idQuizz = ""
 let acertos = 0
 let numeroDePerguntas = []
 let perguntasRespondidas = 0
+let indiceQuizzUser = 0
 function criarQuizz() {
     document.querySelector(".pagina-principal").classList.add("escondido")
     document.querySelector(".quizz-basico").classList.remove("escondido")
@@ -404,6 +405,7 @@ function checarResposta(promessa) {
     resultadoFinal.scrollIntoView()
 }
 function reiniciarQuizz() {
+    perguntasRespondidas = 0
     document.querySelector(".alinhar-quizz").innerHTML = `
     <div class="imagem-principal">
     </div>
@@ -426,8 +428,36 @@ function pegarDados(resposta) {
         <span>${quizz[i].title}</span>
         <p class="escondido">${quizz[i].id}</p>`
     }
+    if (listaID.length !== 0) {
+        document.querySelector(".addQuiz").classList.add(".todosQuizzes")
+        document.querySelector(".addQuiz").classList.remove(".addQuiz")
+        document.querySelector(".todosQuizzes").innerHTML = `
+        <div class="topo-novo">    
+            <p>Seus Quizzes</p>
+            <ion-icon name="add-circle" onclick="criarQuizz()"></ion-icon>
+        </div>
+        <div class="quizzes">
+            <div class="quizz-user" onclick="escolherQuizServidor(this)"></div>
+            <div class="quizz-user" onclick="escolherQuizServidor(this)"></div>
+            <div class="quizz-user" onclick="escolherQuizServidor(this)"></div>
+        </div>
+        `
+        for (i2=0; i2<3; i2++) {
+            const recuperarQuizz = axios.get(`https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes/${listaID[i2]}`)
+            recuperarQuizz.then(carregarProprio)
+            indiceQuizzUser += 1
+        }
+    }
 }
 function embaralhar() {
     return Math.random() - 0.5
 }
 getURL()
+function carregarProprio(resposta) {
+    const quizz = resposta.data
+    const quizzUser = document.querySelectorAll(".quizz-user")
+    quizzUser[indiceQuizzUser].innerHTML = `
+    <img src=${quizz.image}>
+    <span>${quizz.title}</span>
+    <p class="escondido">${quizz.id}</p>`
+}

@@ -530,6 +530,33 @@ input::placeholder {
     margin-top: 130px;
     margin-left: 28px;
 }
+.topo-novo {
+    display: flex;
+}
+.topo-novo ion-icon {
+    font-size: 31px;
+    color: #EC362D;
+}
+.quizz-user {
+    width: 340px;
+    height: 181px;
+    position: relative;
+}
+.quizz-user span {
+    width: 301px;
+    height: 54px;
+    font-family: Roboto;
+    font-size: 19px;
+    font-weight: 400;
+    color: #FFFFFF;
+    word-break: break-all;
+    position: absolute;
+    z-index: 1;
+    bottom: 0px;
+    left: 0px;
+    margin-top: 130px;
+    margin-left: 28px;
+}
 .escondido {
     display: none;
 }
