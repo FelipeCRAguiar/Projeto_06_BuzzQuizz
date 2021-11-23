@@ -1,5 +1,9 @@
 let quizzUsuario = {title: "", image: "", questions: [], levels: []}
 let listaID = []
+let idQuizz = ""
+let acertos = 0
+let numeroDePerguntas = []
+let perguntasRespondidas = 0
 function criarQuizz() {
     document.querySelector(".pagina-principal").classList.add("escondido")
     document.querySelector(".quizz-basico").classList.remove("escondido")
@@ -286,11 +290,15 @@ function erroCriacao(erro) {
     window.location.reload()
 }
 function voltarHomeQuizz() {
+    document.querySelector(".alinhar-quizz").innerHTML = `
+    <div class="imagem-principal">
+    </div>`
+    perguntasRespondidas = 0
     document.querySelector(".exibir-quizz").classList.add("escondido")
     document.querySelector(".pagina-principal").classList.remove("escondido")
 }
 function escolherQuizServidor(quizzEscolhido) {
-    const idQuizz = quizzEscolhido.querySelector("p").innerHTML
+    idQuizz = quizzEscolhido.querySelector("p").innerHTML
     const quizz = axios.get(`https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes/${idQuizz}`)
     quizz.then(exibirQuizz)
 }
@@ -328,14 +336,19 @@ function exibirQuizz(resposta) {
             `
         }
     }
+    let cor = ""
     listaRespostasExibidas = document.querySelectorAll(".titulo-pergunta-quizz")
     for (let i2=0; i2<listaRespostasExibidas.length; i2++) {
-        listaRespostasExibidas[i2].style.background = quizz["questions"][i2]["color"]
+        cor = quizz["questions"][i2]["color"]
+        listaRespostasExibidas[i2].style.background = cor
     }
+    numeroDePerguntas = document.querySelectorAll(".pergunta-quizz-exibicao")
     document.querySelector(".pagina-principal").classList.add("escondido")
     document.querySelector(".exibir-quizz").classList.remove("escondido")
+    document.querySelector(".imagem-principal").scrollIntoView()
 }
 function selecionarResposta(resposta) {
+    perguntasRespondidas += 1
     let pergunta = resposta.parentElement
     let listaResposta = pergunta.querySelectorAll(".respostas-exibicao-quizz")
     for (let i=0; i<listaResposta.length;i++) {
@@ -348,6 +361,55 @@ function selecionarResposta(resposta) {
             listaResposta[i].querySelector("span").style.color = "#FF4B4B"
         }
     }
+    if (resposta.querySelector("p").innerHTML === "true") {
+        acertos += 1
+    }
+    if (perguntasRespondidas === numeroDePerguntas.length) {
+        const quizz = axios.get(`https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes/${idQuizz}`)
+        quizz.then(checarResposta)
+    }
+}
+function checarResposta(promessa) {
+    let indiceNivel = 0
+    let salvarPorcentagem = 0
+    const quizz = promessa.data
+    const div = document.querySelector(".alinhar-quizz")
+    let pontos = Math.floor(100/numeroDePerguntas.length)
+    for (let i=0; i<quizz["levels"].length; i++) {
+        if (pontos > quizz["levels"][i]["minValue"] && salvarPorcentagem < quizz["levels"][i]["minValue"]) {
+            indiceNivel = i
+            salvarPorcentagem = quizz["levels"][i]["minValue"]
+        }
+    }
+    div.innerHTML += `
+    <div class="resultado">
+        <div class="titulo-resultado">
+            <span>${quizz["levels"][indiceNivel]["title"]}</span>
+        </div>
+        <div class="conteudo-resultado">
+            <div class="imagem-resultado">
+                <img src="${quizz["levels"][indiceNivel]["image"]}">
+            </div>
+            <div class="texto-resultado">
+                <span>
+                    ${quizz["levels"][indiceNivel]["text"]}
+                </span>
+            </div>
+        </div>
+    </div>
+    <button class="botao-repetir" onclick="reiniciarQuizz()">Reiniciar quizz</button>
+    <button class="voltar-home" onclick="voltarHomeQuizz()">Voltar pra home</button>
+    `
+    let resultadoFinal = document.querySelector(".resultado")
+    resultadoFinal.scrollIntoView()
+}
+function reiniciarQuizz() {
+    document.querySelector(".alinhar-quizz").innerHTML = `
+    <div class="imagem-principal">
+    </div>
+    `
+    const quizz = axios.get(`https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes/${idQuizz}`)
+    quizz.then(exibirQuizz)
 }
 //A partir daqui o codigo foi feito pelo teones
 function getURL() {
@@ -357,15 +419,12 @@ function getURL() {
 
 function pegarDados(resposta) {
     const quizz = resposta.data.sort(embaralhar)
-    
     const quizzServidor = document.querySelectorAll(".quizz-servidor")
-    
     for (let i = 0; i < quizzServidor.length; i++) {
         quizzServidor[i].innerHTML = `
         <img src=${quizz[i].image}>
         <span>${quizz[i].title}</span>
         <p class="escondido">${quizz[i].id}</p>`
-        console.log("rodei")
     }
 }
 function embaralhar() {

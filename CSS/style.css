@@ -481,6 +481,7 @@ input::placeholder {
     font-size: 19px;
     line-height: 25px;
     color: #484848;
+    word-break: break-all;
 }
 .conteudo-resultado {
     width: 100%;
