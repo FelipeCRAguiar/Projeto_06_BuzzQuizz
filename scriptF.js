@@ -33,28 +33,28 @@ function criarPerguntas() {
     quizzUsuario["image"] = lista[1].value
     document.querySelector(".pergunta-quizz").innerHTML = `
     <p>Crie suas perguntas</p>
-        <div class="criar-pergunta" data-identifier="question">
-            <div class="pergunta">
+        <div class="criar-pergunta">
+            <div class="pergunta" data-identifier="question">
                 <p>Pergunta 1</p>
                 <input placeholder="Texto da pergunta"> <br>
                 <input placeholder="Cor de fundo da pergunta">
             </div>
-            <div class="resposta-correta">
+            <div class="resposta-correta" data-identifier="question">
                 <p>Resposta Correta</p>
                 <input placeholder="Resposta correta"> <br>
                 <input placeholder="URL da imagem">
             </div>
             <div class="respostas-incorretas">
                 <p>Respostas Incorretas</p>
-                <div>
+                <div data-identifier="question">
                     <input placeholder="Resposta incorreta 1"> <br>
                     <input placeholder="URL da imagem 1">
                 </div>
-                <div>
+                <div data-identifier="question">
                     <input placeholder="Resposta incorreta 2"> <br>
                     <input placeholder="URL da imagem 2">
                 </div>
-                <div>
+                <div data-identifier="question">
                     <input placeholder="Resposta incorreta 3"> <br>
                     <input placeholder="URL da imagem 3">
                 </div>
