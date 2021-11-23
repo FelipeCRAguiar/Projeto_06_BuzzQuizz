@@ -33,7 +33,7 @@ function criarPerguntas() {
     quizzUsuario["image"] = lista[1].value
     document.querySelector(".pergunta-quizz").innerHTML = `
     <p>Crie suas perguntas</p>
-        <div class="criar-pergunta">
+        <div class="criar-pergunta" data-identifier="question">
             <div class="pergunta">
                 <p>Pergunta 1</p>
                 <input placeholder="Texto da pergunta"> <br>
@@ -64,14 +64,14 @@ function criarPerguntas() {
     for (let i = 1; i<numPerguntas;i++) {
         document.querySelector(".pergunta-quizz").innerHTML += `
         <div class="placeholder-pergunta">
-            <p>Pergunta ${i+1}</p><ion-icon name="create-outline" onclick="abrirPergunta(this)"></ion-icon>
+            <p>Pergunta ${i+1}</p><ion-icon name="create-outline" onclick="abrirPergunta(this)" data-identifier="expand"></ion-icon>
         </div>
         `
     }
     document.querySelector(".pergunta-quizz").innerHTML += '<button onclick="criarNiveis()">Prosseguir para criar níveis</button>'
     document.querySelector(".niveis-quizz .alinharQuiz").innerHTML = `
     <p class="títuloPagina">Agora, decida os níveis</p>
-    <div class="nivel">
+    <div class="nivel" data-identifier="level">
         <topo>
             Nível 1
         </topo>
@@ -84,7 +84,7 @@ function criarPerguntas() {
     for (let i3 = 1; i3<numNiveis; i3++) {
         document.querySelector(".niveis-quizz .alinharQuiz").innerHTML += `
         <div class="placeholder-nivel">
-            <p>Nível ${i3+1}</p><ion-icon name="create-outline" onclick="abrirNivel(this)"></ion-icon>
+            <p>Nível ${i3+1}</p><ion-icon name="create-outline" onclick="abrirNivel(this)" data-identifier="expand"></ion-icon>
         </div>
         `
     }
@@ -316,7 +316,7 @@ function exibirQuizz(resposta) {
         listaRespostasInicio = listaRespostasInicio.sort(embaralhar)
         listaRespostas.push(listaRespostasInicio)
         div.innerHTML += `
-        <div class="pergunta-quizz-exibicao">
+        <div class="pergunta-quizz-exibicao" data-identifier="question">
             <div class="titulo-pergunta-quiz">
                 <span>${quizz["questions"][i]["title"]}</span>
             </div>
@@ -329,7 +329,7 @@ function exibirQuizz(resposta) {
     for (let i3=0; i3<listaRespostas.length; i3++) {
         for (let i4=0; i4<listaRespostas[i3].length; i4++) {
             listaRespostaFinal[i3].innerHTML += `
-                <div class="respostas-exibicao-quizz" onclick="selecionarResposta(this)">
+                <div class="respostas-exibicao-quizz" onclick="selecionarResposta(this)" data-identifier="answer">
                     <img src="${listaRespostas[i3][i4]["image"]}">
                     <span>${listaRespostas[i3][i4]["text"]}</span>
                     <p class="escondido">${listaRespostas[i3][i4]["isCorrectAnswer"]}</p>
@@ -383,7 +383,7 @@ function checarResposta(promessa) {
         }
     }
     div.innerHTML += `
-    <div class="resultado">
+    <div class="resultado" data-identifier="quizz-result">
         <div class="titulo-resultado">
             <span>${quizz["levels"][indiceNivel]["title"]}</span>
         </div>
@@ -434,12 +434,12 @@ function pegarDados(resposta) {
         document.querySelector(".todosQuizzes").innerHTML = `
         <div class="topo-novo">    
             <p>Seus Quizzes</p>
-            <ion-icon name="add-circle" onclick="criarQuizz()"></ion-icon>
+            <ion-icon name="add-circle" onclick="criarQuizz()" data-identifier="create-quizz"></ion-icon>
         </div>
-        <div class="quizzes">
-            <div class="quizz-user" onclick="escolherQuizServidor(this)"></div>
-            <div class="quizz-user" onclick="escolherQuizServidor(this)"></div>
-            <div class="quizz-user" onclick="escolherQuizServidor(this)"></div>
+        <div class="quizzes" data-identifier="user-quizzes">
+            <div class="quizz-user" onclick="escolherQuizServidor(this)" data-identifier="quizz-card"></div>
+            <div class="quizz-user" onclick="escolherQuizServidor(this)" data-identifier="quizz-card"></div>
+            <div class="quizz-user" onclick="escolherQuizServidor(this)" data-identifier="quizz-card"></div>
         </div>
         `
         for (i2=0; i2<3; i2++) {
@@ -452,7 +452,6 @@ function pegarDados(resposta) {
 function embaralhar() {
     return Math.random() - 0.5
 }
-getURL()
 function carregarProprio(resposta) {
     const quizz = resposta.data
     const quizzUser = document.querySelectorAll(".quizz-user")
@@ -461,3 +460,4 @@ function carregarProprio(resposta) {
     <span>${quizz.title}</span>
     <p class="escondido">${quizz.id}</p>`
 }
+getURL()

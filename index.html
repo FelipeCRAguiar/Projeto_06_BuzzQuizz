@@ -20,19 +20,19 @@
         <div class="alinharQuiz">
             <div class="addQuiz">
                 <div class="mensagem">Você não criou nenhum <br> quizz ainda :( </div>
-                <div class="criarQuizz" onclick="criarQuizz()">Criar Quizz</div>
+                <div class="criarQuizz" onclick="criarQuizz()" data-identifier="create-quizz">Criar Quizz</div>
             </div>
             <div class="todosQuizzes">
                 <p>Todos os Quizzes</p>
-                <div class="quizzes">
-                    <div class="quizz-servidor" onclick="escolherQuizServidor(this)"></div>
-                    <div class="quizz-servidor" onclick="escolherQuizServidor(this)"></div>
-                    <div class="quizz-servidor" onclick="escolherQuizServidor(this)"></div>
+                <div class="quizzes" data-identifier="general-quizzes">
+                    <div class="quizz-servidor" onclick="escolherQuizServidor(this)" data-identifier="quizz-card"></div>
+                    <div class="quizz-servidor" onclick="escolherQuizServidor(this)" data-identifier="quizz-card"></div>
+                    <div class="quizz-servidor" onclick="escolherQuizServidor(this)" data-identifier="quizz-card"></div>
                 </div>
-                <div class="quizzes">
-                    <div class="quizz-servidor" onclick="escolherQuizServidor(this)"></div>
-                    <div class="quizz-servidor" onclick="escolherQuizServidor(this)"></div>
-                    <div class="quizz-servidor" onclick="escolherQuizServidor(this)"></div>
+                <div class="quizzes" data-identifier="general-quizzes">
+                    <div class="quizz-servidor" onclick="escolherQuizServidor(this)" data-identifier="quizz-card"></div>
+                    <div class="quizz-servidor" onclick="escolherQuizServidor(this)" data-identifier="quizz-card"></div>
+                    <div class="quizz-servidor" onclick="escolherQuizServidor(this)" data-identifier="quizz-card"></div>
                 </div>
             </div>
         </div>
