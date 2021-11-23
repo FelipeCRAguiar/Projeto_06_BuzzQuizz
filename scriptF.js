@@ -213,9 +213,9 @@ function finalizarQuizz() {
         return alert("Pelo menos uma das porcentagens tem que ser 0")
     }
     quizzUsuario["levels"] = listaNiveisFinal
-    document.querySelector(".niveis-quizz").classList.add("escondido")
-    document.querySelector(".quizz-criado").classList.remove("escondido")
-    console.log(quizzUsuario)
+    let requisicao = axios.post("https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes", quizzUsuario)
+    requisicao.then(salvarLocal)
+    requisicao.catch(erroCriacao)
 }
 function voltarHome() {
     document.querySelector(".quizz-criado").classList.add("escondido")
@@ -225,31 +225,31 @@ function abrirPergunta(placeholder) {
     placeholder.parentElement.classList.add("criar-pergunta")
     placeholder.parentElement.classList.remove("placeholder-pergunta")
     placeholder.parentElement.innerHTML = `
-        <div class="pergunta">
-            <p>${placeholder.parentElement.querySelector("p").innerHTML}</p>
-            <input placeholder="Texto da pergunta"> <br>
-            <input placeholder="Cor de fundo da pergunta">
-        </div>
-        <div class="resposta-correta">
-            <p>Resposta Correta</p>
-            <input placeholder="Resposta correta"> <br>
-            <input placeholder="URL da imagem">
-        </div>
-        <div class="respostas-incorretas">
-            <p>Respostas Incorretas</p>
-            <div>
-                <input placeholder="Resposta incorreta 1"> <br>
-                <input placeholder="URL da imagem 1">
-            </div>
-            <div>
-                <input placeholder="Resposta incorreta 2"> <br>
-                <input placeholder="URL da imagem 2">
-             </div>
-            <div>
-                <input placeholder="Resposta incorreta 3"> <br>
-                <input placeholder="URL da imagem 3">
-             </div>
-        </div>
+    <div class="pergunta">
+    <p>${placeholder.parentElement.querySelector("p").innerHTML}</p>
+    <input placeholder="Texto da pergunta"> <br>
+    <input placeholder="Cor de fundo da pergunta">
+    </div>
+    <div class="resposta-correta">
+    <p>Resposta Correta</p>
+    <input placeholder="Resposta correta"> <br>
+    <input placeholder="URL da imagem">
+    </div>
+    <div class="respostas-incorretas">
+    <p>Respostas Incorretas</p>
+    <div>
+    <input placeholder="Resposta incorreta 1"> <br>
+    <input placeholder="URL da imagem 1">
+    </div>
+    <div>
+    <input placeholder="Resposta incorreta 2"> <br>
+    <input placeholder="URL da imagem 2">
+    </div>
+    <div>
+    <input placeholder="Resposta incorreta 3"> <br>
+    <input placeholder="URL da imagem 3">
+    </div>
+    </div>
     `
 }
 function abrirNivel(placeholder) {
@@ -257,11 +257,21 @@ function abrirNivel(placeholder) {
     placeholder.parentElement.classList.remove("placeholder-nivel")
     placeholder.parentElement.innerHTML = `
     <topo>
-        ${placeholder.parentElement.querySelector("p").innerHTML}
+    ${placeholder.parentElement.querySelector("p").innerHTML}
     </topo>
     <input type="text" placeholder="Título do nível">
     <input type="text" placeholder="% de acerto mínima">
     <input type="text" placeholder="URL da imagem do nível">
     <input type="text" placeholder="Descrição do nível">
     `
+}
+function salvarLocal(resposta) {
+    localStorage.setItem(resposta.data[key],resposta.data[id])
+    document.querySelector(".previa-quizz div").innerHTML = `<img src=${resposta.data[image]}>`
+    document.querySelector(".niveis-quizz").classList.add("escondido")
+    document.querySelector(".quizz-criado").classList.remove("escondido")
+}
+function erroCriacao(erro) {
+    alert("Opa! Tivemos algum erro, recarregando a pagina...")
+    window.location.reload()
 }
