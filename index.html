@@ -16,7 +16,7 @@
     <header>    
         BuzzQuizz
     </header>
-    <div class="pagina-principal escondido">
+    <div class="pagina-principal">
         <div class="alinharQuiz">
             <div class="addQuiz">
                 <div class="mensagem">Você não criou nenhum <br> quizz ainda :( </div>
@@ -25,14 +25,14 @@
             <div class="todosQuizzes">
                 <p>Todos os Quizzes</p>
                 <div class="quizzes">
-                    <img src="quiz.jpg">
-                    <img src="quiz.jpg">
-                    <img src="quiz.jpg">
+                    <div class="quizz-servidor" onclick="escolherQuizServidor(this)"></div>
+                    <div class="quizz-servidor" onclick="escolherQuizServidor(this)"></div>
+                    <div class="quizz-servidor" onclick="escolherQuizServidor(this)"></div>
                 </div>
                 <div class="quizzes">
-                    <img src="quiz.jpg">
-                    <img src="quiz.jpg">
-                    <img src="quiz.jpg">
+                    <div class="quizz-servidor" onclick="escolherQuizServidor(this)"></div>
+                    <div class="quizz-servidor" onclick="escolherQuizServidor(this)"></div>
+                    <div class="quizz-servidor" onclick="escolherQuizServidor(this)"></div>
                 </div>
             </div>
         </div>
@@ -64,7 +64,7 @@
             <button class="voltar-home" onclick="voltarHome()">Voltar pra home</button>
         </div>
     </div>
-    <div class="exibir-quizz">
+    <div class="exibir-quizz escondido">
         <div class="alinhar-quizz">
             <div class="imagem-principal">
                 <img src="quiz.jpg">

@@ -287,3 +287,26 @@ function voltarHomeQuizz() {
     document.querySelector(".exibir-quizz").classList.add("escondido")
     document.querySelector(".pagina-principal").classList.remove("escondido")
 }
+//A partir daqui o codigo foi feito pelo teones
+function getURL() {
+    const promessa = axios.get("https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes")
+    promessa.then(pegarDados)
+}
+
+function pegarDados(resposta) {
+    const quizz = resposta.data.sort(embaralhar)
+    
+    const quizzServidor = document.querySelectorAll(".quizz-servidor")
+    
+    for (let i = 0; i < quizzServidor.length; i++) {
+        quizzServidor[i].innerHTML = `
+        <img src=${quizz[i].image}>
+        <span>${quizz[i].title}</span>
+        <p class="escondido">${quizz[i].id}</p>`
+        console.log("rodei")
+    }
+}
+function embaralhar() {
+    return Math.random() - 0.5
+}
+getURL()
