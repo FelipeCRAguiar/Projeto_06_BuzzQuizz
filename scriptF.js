@@ -1,14 +1,14 @@
-let quizzUsuario = {}
+let quizzUsuario = {title: "", image: "", questions: [], levels: []}
 function criarQuizz() {
     document.querySelector(".pagina-principal").classList.add("escondido")
     document.querySelector(".quizz-basico").classList.remove("escondido")
 }
-function criarPerguntas(clique) {
+function criarPerguntas() {
     let lista = document.querySelectorAll(".informacoes-basicas input")
     let titulo = lista[0].value
     let numPerguntas = parseInt(lista[2].value)
     let numNiveis = parseInt(lista[3].value)
-    /*if (titulo.length < 20 || titulo.length > 65) {
+    if (titulo.length < 20 || titulo.length > 65) {
         return alert("O titulo deve ter no minimo 20 caracteres e no maximo 65 caracteres")
     }
     if (numPerguntas < 3 || typeof(numPerguntas) !== "number" || isNaN(numPerguntas)) {
@@ -22,7 +22,9 @@ function criarPerguntas(clique) {
     }
     catch {
         return alert("Sua URL não é valida")
-    }*/
+    }
+    quizzUsuario["title"] = titulo
+    quizzUsuario["image"] = lista[1].value
     document.querySelector(".pergunta-quizz").innerHTML = `
     <p>Crie suas perguntas</p>
         <div class="criar-pergunta">
@@ -88,16 +90,22 @@ function criarPerguntas(clique) {
     document.querySelector(".pergunta-quizz").classList.remove("escondido")
 }
 function criarNiveis() {
+    let listaPerguntasFinal = []
     const hexadecimal = ["#","0","1","2","3","4","5","6","7","8","9","A","a","B","b","C","c","D","d","E","e","F","f"]
     let checagemHexadecimal = ""
     let listaPerguntas = document.querySelectorAll(".criar-pergunta")
-    /*for (let i = 0; i<listaPerguntas.length;i++) {
+    for (let i6 = 0; i6<listaPerguntas.length;i6++) {
+        listaPerguntasFinal.push({})
+    }
+    for (let i = 0; i<listaPerguntas.length;i++) {
+        let listaRespostasFinal = []
         let listaPergunta = listaPerguntas[i].querySelectorAll(".pergunta input")
         let listaRespostaCerta = listaPerguntas[i].querySelectorAll(".resposta-correta input")
         let listaRespostaErrada = listaPerguntas[i].querySelectorAll(".respostas-incorretas input")
         if (listaPergunta[0].value.length < 20) {
             return alert("A pergunta deve ter no minimo 20 caracteres")
         }
+        listaPerguntasFinal[i]["title"] = listaPergunta[0].value
         if (listaPergunta[1].value.length !== 7) {
             return alert("A cor da pergunta deve ser dado em formato Hexadecimal; Por exemplo: #FFFFFF ou #000000")
         }
@@ -111,15 +119,20 @@ function criarNiveis() {
         if (checagemHexadecimal.length < 7) {
             return alert("A cor da pergunta deve ser dado em formato Hexadecimal; Por exemplo: #FFFFFF ou #000000")
         }
+        listaPerguntasFinal[i]["color"] = listaPergunta[1].value
         if (listaRespostaCerta[0].value === "") {
             return alert("Sua resposta certa não pode estar vazia")
         }
+        listaRespostasFinal.push({})
+        listaRespostasFinal[0]["text"] = listaRespostaCerta[0].value
         try {
             new URL(listaRespostaCerta[1].value)
         }
         catch {
             return alert("Sua URL não é valida")
         }
+        listaRespostasFinal[0]["image"] = listaRespostaCerta[1].value
+        listaRespostasFinal[0]["isCorrectAnswer"] = true
         if (((listaRespostaErrada[0].value === "" || listaRespostaErrada[1].value === "") && (listaRespostaErrada[0].value !== "" || listaRespostaErrada[1].value !== "")) || ((listaRespostaErrada[2].value === "" || listaRespostaErrada[3].value === "") && (listaRespostaErrada[2].value !== "" || listaRespostaErrada[3].value !== "")) || ((listaRespostaErrada[4].value === "" || listaRespostaErrada[5].value === "") && (listaRespostaErrada[4].value !== "" || listaRespostaErrada[5].value !== ""))) {
             return alert("Sua resposta errada precisa se uma resposta e de uma imagem")
         }
@@ -138,25 +151,43 @@ function criarNiveis() {
                 }
             }
         }
+        for (let i5 = 0; i5<listaRespostaErrada.length; i5++) {
+            if (i5 === 0 || i5 === 2 || i5 === 4) {
+                if (listaRespostaErrada[i5].value !== "") {
+                    listaRespostasFinal.push({})
+                    listaRespostasFinal[listaRespostasFinal.length - 1]["text"] = listaRespostaErrada[i5].value
+                    listaRespostasFinal[listaRespostasFinal.length - 1]["image"] = listaRespostaErrada[i5 + 1].value
+                    listaRespostasFinal[listaRespostasFinal.length - 1]["isCorrectAnswer"] = false
+                }
+            }
+        }
+        listaPerguntasFinal[i]["answers"] = listaRespostasFinal
     }
     if (document.querySelector(".placeholder-pergunta") !== null) {
         return alert("Você ainda tem perguntas não criadas")
-    }*/
+    }
+    quizzUsuario["questions"] = listaPerguntasFinal
     document.querySelector(".pergunta-quizz").classList.add("escondido")
     document.querySelector(".niveis-quizz").classList.remove("escondido")
 }
 function finalizarQuizz() {
+    let listaNiveisFinal = []
     let listaNiveis = document.querySelectorAll(".nivel")
+    for (let i3 = 0;  i3<listaNiveis.length; i3++) {
+        listaNiveisFinal.push({})
+    }
     let listaPorcentagem = []
     let checagem0 = 0
-    /*for (let i = 0; i<listaNiveis.length; i++) {
+    for (let i = 0; i<listaNiveis.length; i++) {
         let inputNivel = listaNiveis[i].querySelectorAll("input")
         if (inputNivel[0].value.length < 10) {
             return alert("O nivel deve ter no minimo 10 caracteres")
         }
+        listaNiveisFinal[i]["title"] = inputNivel[0].value
         if (parseInt(inputNivel[1].value) < 0 || parseInt(inputNivel[1].value) > 100 || isNaN(parseInt(inputNivel[1].value))) {
             return alert("A porcentagem deve ser um numero entre 0 e 100")
         }
+        listaNiveisFinal[i]["minValue"] = parseInt(inputNivel[1].value)
         listaPorcentagem.push(parseInt(inputNivel[1].value))
         try {
             new URL(inputNivel[2].value)
@@ -164,9 +195,11 @@ function finalizarQuizz() {
         catch {
             return alert("Sua URL não é valida")
         }
+        listaNiveisFinal[i]["image"] = inputNivel[2].value
         if (inputNivel[3].value.length < 30) {
             return alert("A descrição do nivel deve ter no minimo 30 caracteres")
         }
+        listaNiveisFinal[i]["text"] = inputNivel[3].value
     }
     if (document.querySelector(".placeholder-nivel") !== null) {
         return alert("Você ainda tem niveis não criados")
@@ -178,9 +211,11 @@ function finalizarQuizz() {
     }
     if (checagem0 === 0) {
         return alert("Pelo menos uma das porcentagens tem que ser 0")
-    }*/
+    }
+    quizzUsuario["levels"] = listaNiveisFinal
     document.querySelector(".niveis-quizz").classList.add("escondido")
     document.querySelector(".quizz-criado").classList.remove("escondido")
+    console.log(quizzUsuario)
 }
 function voltarHome() {
     document.querySelector(".quizz-criado").classList.add("escondido")
