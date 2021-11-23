@@ -1,4 +1,5 @@
 let quizzUsuario = {title: "", image: "", questions: [], levels: []}
+let listaID = []
 function criarQuizz() {
     document.querySelector(".pagina-principal").classList.add("escondido")
     document.querySelector(".quizz-basico").classList.remove("escondido")
@@ -275,6 +276,7 @@ function abrirNivel(placeholder) {
 }
 function salvarLocal(resposta) {
     localStorage.setItem(resposta.data[key],resposta.data[id])
+    listaID.push(resposta.data[id])
     document.querySelector(".previa-quizz div").innerHTML = `<img src=${resposta.data[image]}>`
     document.querySelector(".niveis-quizz").classList.add("escondido")
     document.querySelector(".quizz-criado").classList.remove("escondido")
