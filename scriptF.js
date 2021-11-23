@@ -289,6 +289,66 @@ function voltarHomeQuizz() {
     document.querySelector(".exibir-quizz").classList.add("escondido")
     document.querySelector(".pagina-principal").classList.remove("escondido")
 }
+function escolherQuizServidor(quizzEscolhido) {
+    const idQuizz = quizzEscolhido.querySelector("p").innerHTML
+    const quizz = axios.get(`https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes/${idQuizz}`)
+    quizz.then(exibirQuizz)
+}
+function exibirQuizz(resposta) {
+    let listaRespostas = []
+    const quizz = resposta.data
+    document.querySelector(".imagem-principal").innerHTML = `
+    <img src="${quizz["image"]}">
+    <span>${quizz["title"]}</span>
+    `
+    const div = document.querySelector(".alinhar-quizz")
+    for (let i=0; i<quizz["questions"].length; i++) {
+        let listaRespostasInicio = quizz["questions"][i]["answers"]
+        listaRespostasInicio = listaRespostasInicio.sort(embaralhar)
+        listaRespostas.push(listaRespostasInicio)
+        div.innerHTML += `
+        <div class="pergunta-quizz-exibicao">
+            <div class="titulo-pergunta-quiz">
+                <span>${quizz["questions"][i]["title"]}</span>
+            </div>
+            <div class="lista-respostas-exibicao-quizz">
+            </div>
+        </div>
+        `
+    }
+    let listaRespostaFinal = document.querySelectorAll(".lista-respostas-exibicao-quizz")
+    for (let i3=0; i3<listaRespostas.length; i3++) {
+        for (let i4=0; i4<listaRespostas[i3].length; i4++) {
+            listaRespostaFinal[i3].innerHTML += `
+                <div class="respostas-exibicao-quizz" onclick="selecionarResposta(this)">
+                    <img src="${listaRespostas[i3][i4]["image"]}">
+                    <span>${listaRespostas[i3][i4]["text"]}</span>
+                    <p class="escondido">${listaRespostas[i3][i4]["isCorrectAnswer"]}</p>
+                </div>
+            `
+        }
+    }
+    listaRespostasExibidas = document.querySelectorAll(".titulo-pergunta-quizz")
+    for (let i2=0; i2<listaRespostasExibidas.length; i2++) {
+        listaRespostasExibidas[i2].style.background = quizz["questions"][i2]["color"]
+    }
+    document.querySelector(".pagina-principal").classList.add("escondido")
+    document.querySelector(".exibir-quizz").classList.remove("escondido")
+}
+function selecionarResposta(resposta) {
+    let pergunta = resposta.parentElement
+    let listaResposta = pergunta.querySelectorAll(".respostas-exibicao-quizz")
+    for (let i=0; i<listaResposta.length;i++) {
+        listaResposta[i].setAttribute("onclick", "")
+        let valor = listaResposta[i].querySelector("p").innerHTML
+        if (valor === "true") {
+            listaResposta[i].querySelector("span").style.color = "#009C22"
+        }
+        if (valor === "false") {
+            listaResposta[i].querySelector("span").style.color = "#FF4B4B"
+        }
+    }
+}
 //A partir daqui o codigo foi feito pelo teones
 function getURL() {
     const promessa = axios.get("https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes")
